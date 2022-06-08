@@ -240,6 +240,7 @@ describe("schema", () => {
         */
         assertSchema("type-aliases-tuple-of-variable-length", "MyTuple");
         assertSchema("type-aliases-tuple-with-rest-element", "MyTuple");
+        assertSchema("type-aliases-tuple-not-a-tuple", "NotTuple");
     });
 
     describe("enums", () => {

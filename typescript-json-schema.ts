@@ -270,7 +270,10 @@ function resolveTupleType(propertyType: ts.Type): ts.TupleTypeNode | null {
         propertyType.getFlags() & ts.TypeFlags.Object &&
         (<ts.ObjectType>propertyType).objectFlags & ts.ObjectFlags.Reference
     ) {
-        return (propertyType as ts.TypeReference).target as any;
+        const isMultiType = ((propertyType as any).typeArguments.map(({ id }: any) => id) as number[]).some((id, _i, arr) => id !== arr[0]);
+        if (isMultiType) {
+            return (propertyType as ts.TypeReference).target as any;
+        }
     }
     if (
         !(
